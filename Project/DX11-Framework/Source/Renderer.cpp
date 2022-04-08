@@ -20,6 +20,7 @@
 #include "Factory.hpp"
 #include <array>
 #include <math.h>
+#include <iostream>
 
 /*============================================================================*\
 || --------------------------- GLOBAL VARIABLES ----------------------------- ||
@@ -254,7 +255,7 @@ void DX11::Renderer::InitDX11()
     mShader = DX11::Shader(mDevice, shaderInfo);
 
     // display mesh -- delete this
-    mDisplayMesh = DX11::Mesh(mDevice, "../Resource/Models/StanfordBunny.obj");
+    mDisplayMesh = DX11::Mesh(mDevice, "../Resource/bunny.obj");
 
     // camera -- delete this
     DirectX::XMVECTOR position = { 0, 0.1f, 1 };
@@ -378,8 +379,8 @@ void DX11::Renderer::ShutdownDX11()
     DX11::DebugDevice debug = mDevice.Debug();
     if (debug != nullptr)
     {
-        // debug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
-        debug.Reset();
+         debug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+        //debug.Reset();
     }
     debug.Reset();
 #endif
@@ -397,6 +398,9 @@ void DX11::Renderer::Present()
     DX11::DeviceContext context = mDevice.Context();
     context->OMSetRenderTargets(1, renderTargetViews, nullptr);
     mSwapChain->Present(mVSync, 0);
+    //mSwapChain->Present(0, DXGI_PRESENT_RESTRICT_TO_OUTPUT);
+    
     const DirectX::XMVECTORF32 actuallyDarkGray = { { { 0.1f, 0.1f, 0.1f, 1.000000000f } } };
     context->ClearRenderTargetView(renderTargetViews[0], actuallyDarkGray);
+    //context->ClearRenderTargetView(nullptr, actuallyDarkGray);
 }

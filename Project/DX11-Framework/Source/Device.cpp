@@ -19,6 +19,7 @@
 #include "DX11PCH.hpp"
 #include "Device.hpp"
 
+#include <iostream>
 /*============================================================================*\
 || --------------------------- GLOBAL VARIABLES ----------------------------- ||
 \*============================================================================*/
@@ -46,6 +47,7 @@ DX11::Device::Device(DX11::Adaptor adaptor)
 
 #ifdef USE_DEBUG_DEVICE
     deviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+    std::cout << "Debug layers" << std::endl;
 #endif // USE_DEBUG_DEVICE
 
     std::vector<D3D_FEATURE_LEVEL> featureLevels = {
@@ -53,7 +55,8 @@ DX11::Device::Device(DX11::Adaptor adaptor)
         D3D_FEATURE_LEVEL_11_0,
     };
 
-    if (!SUCCEEDED(D3D11CreateDevice(adaptor.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr,
+    //if (!SUCCEEDED(D3D11CreateDevice(adaptor.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr,
+    if (!SUCCEEDED(D3D11CreateDevice(nullptr,D3D_DRIVER_TYPE_HARDWARE, nullptr,
         deviceFlags, featureLevels.data(), uint32_t(featureLevels.size()), D3D11_SDK_VERSION,
         ReleaseAndGetAddressOf(),  nullptr, mContext.ReleaseAndGetAddressOf())))
     {

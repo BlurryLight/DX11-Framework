@@ -1,0 +1,2 @@
+" disable ycm ale
+let g:ycm_ale_on = 0

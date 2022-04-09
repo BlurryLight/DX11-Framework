@@ -34,7 +34,7 @@
   its a desctructor, it cleans up everything
 */
 /****************************************************************************/
-DX11::Mesh::~Mesh() 
+DX11::Mesh::~Mesh()
 {
     VBO.ReleaseAndGetAddressOf();
     IBO.ReleaseAndGetAddressOf();
@@ -52,7 +52,7 @@ DX11::Mesh::~Mesh()
   Path of the file to load
 */
 /****************************************************************************/
-DX11::Mesh::Mesh(DX11::Device device, std::string path) 
+DX11::Mesh::Mesh(DX11::Device device, std::string path)
 {
     // read file via ASSIMP
     Assimp::Importer importer;
@@ -100,7 +100,7 @@ DX11::Mesh::Mesh(DX11::Device device, std::string path)
   The ID3D11Device
 */
 /****************************************************************************/
-void DX11::Mesh::Draw(DX11::Device device) 
+void DX11::Mesh::Draw(DX11::Device device)
 {
     DX11::DeviceContext context = device.Context();
     uint32_t offset[] = { 0 };
@@ -123,7 +123,7 @@ void DX11::Mesh::Draw(DX11::Device device)
   The ASSIMP type mesh
 */
 /****************************************************************************/
-void DX11::Mesh::GetMesh(aiMesh* mesh) 
+void DX11::Mesh::GetMesh(aiMesh* mesh)
 {
     // verticies
     for (unsigned i = 0; i < mesh->mNumVertices; ++i)
